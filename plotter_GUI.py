@@ -2,6 +2,7 @@ import sys
 from PySide2 import QtWidgets, QtCore, QtGui
 import random
 import numpy as np
+from decimal import Decimal
 
 import matplotlib
 matplotlib.use('Qt5Agg')
@@ -70,8 +71,8 @@ class plotterApp(QtWidgets.QMainWindow):
         else:
             QtWidgets.QMessageBox.about(self, "empty Function", "you have to enter a function expression")
         if self.lineEdit_xMin.text() and self.lineEdit_xMax.text():
-            xMin = float(self.lineEdit_xMin.text())
-            xMax = float(self.lineEdit_xMax.text())
+            xMin = float(Decimal(self.lineEdit_xMin.text()))
+            xMax = float(Decimal(self.lineEdit_xMax.text()))
             if xMin >= xMax:
                 QtWidgets.QMessageBox.about(self, "Wrong limits", "x min limit should be less than x max limit")
         else:
@@ -108,6 +109,7 @@ class plotterApp(QtWidgets.QMainWindow):
 
         self.lineEdit_xMin = QtWidgets.QLineEdit(self)
         self.lineEdit_xMin.setPlaceholderText("X min")
+        self.lineEdit_xMin.setValidator(QtGui.QDoubleValidator())
         grid.addWidget(self.lineEdit_xMin, 1, 1)
 
         self.label_xMax = QtWidgets.QLabel("X max",self)
@@ -115,6 +117,7 @@ class plotterApp(QtWidgets.QMainWindow):
 
         self.lineEdit_xMax = QtWidgets.QLineEdit(self)
         self.lineEdit_xMax.setPlaceholderText("X max")
+        self.lineEdit_xMax.setValidator(QtGui.QDoubleValidator())
         grid.addWidget(self.lineEdit_xMax, 1, 3)
 
         self.pushButton_plot = QtWidgets.QPushButton("plot",self)
