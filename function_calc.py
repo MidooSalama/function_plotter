@@ -1,4 +1,5 @@
 import re
+import numpy as np
 
 
 def calc(operand1, operand2, operator):
@@ -16,6 +17,8 @@ def calc(operand1, operand2, operator):
     if operator == '*':
         return op1 * op2
     if operator == '/':
+        if op2 == 0:
+            return np.nan
         return op1 / op2
     if operator == '+':
         return op1 + op2
@@ -130,7 +133,7 @@ def function_parsing(funcString):
             number = True
     functionElements.append(funcString[opIdx_old+1:index+1])
 
-    print(functionElements)
+    # print(functionElements)
     return functionElements
 
 

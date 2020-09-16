@@ -19,7 +19,7 @@ class MplCanvas(FigureCanvasQTAgg):
     def __init__(self, parent=None, width=5, height=4, dpi=100):
         fig = Figure(figsize=(width, height), dpi=dpi)
         self.axes = fig.add_subplot(111)
-        fig.add_axes(yScale='log')
+        self.axes.grid(True)
         super(MplCanvas, self).__init__(fig)
 
 
@@ -59,6 +59,7 @@ class plotterApp(QtWidgets.QMainWindow):
         #   - yData: Array of the corresponding data on the Y-axis
         self.canvas.axes.cla()
         self.canvas.axes.plot(xData, yData, 'r')
+        self.canvas.axes.grid(True)
         self.canvas.draw()
 
     def plotFunction(self):
@@ -96,7 +97,7 @@ class plotterApp(QtWidgets.QMainWindow):
             else:
                 # partitioning the complex expression into simple elements  (operators and operands) stored in array
                 expressionArray = function_calc.function_parsing(functionString)
-                xArray = np.linspace(xMin, xMax, 100)
+                xArray = np.linspace(xMin, xMax, 1000)
                 yArray = []
 
                 # calculate the function for each x value from the X-axis
